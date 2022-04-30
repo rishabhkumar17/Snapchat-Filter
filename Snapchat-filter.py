@@ -54,8 +54,11 @@ frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
 
 cv2.imshow("window", frame)
 
-frame = np.resize(frame,(1,3))
+frame = np.array(frame)
 
-pd.DataFrame(frame,  columns=['Channel 1', 'Channel 2', 'Channel 3']).to_csv('./Prediction.csv', index= False)
+frame = frame.reshape((-1,3))
+
+pd.DataFrame(frame,  columns=['Channel 1',
+                              'Channel 2', 'Channel 3']).to_csv('./Prediction.csv', index= False)
 
 cv2.waitKey(0)
